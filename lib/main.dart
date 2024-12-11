@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viper_form_app/dependecy_injection.dart';
 import 'package:viper_form_app/modules/form_data/view/form_data_view.dart';
+import 'package:viper_form_app/modules/form_data_v2/view/form_data_view_v2.dart';
 
 void main() {
   setupDependencyInjection();
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       initialRoute: '/',
       routes: {
-        '/': (context) => FormDataView(),
+        '/': (context) => FormDataViewV2(),
       },
     );
   }

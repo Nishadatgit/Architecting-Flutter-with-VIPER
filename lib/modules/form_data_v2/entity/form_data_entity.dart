@@ -1,9 +1,9 @@
 import 'package:viper_form_app/modules/form_data/entity/form_data_entity.dart';
 
 class FormDataEntityV2 extends FormDataEntity {
-  final bool isSubscribed;
+  bool isSubscribed;
 
-  const FormDataEntityV2(
+  FormDataEntityV2(
       {required this.isSubscribed,
       required super.firstName,
       required super.lastName,
@@ -23,7 +23,4 @@ class FormDataEntityV2 extends FormDataEntity {
       isSubscribed: json['is_subscribed'] ?? false,
     );
   }
-
-  @override
-  List<Object?> get props => [firstName, lastName, age];
 }

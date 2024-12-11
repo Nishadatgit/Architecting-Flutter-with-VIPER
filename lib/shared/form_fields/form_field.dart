@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:viper_form_app/shared/custom_fields/checkbox.dart';
-import 'package:viper_form_app/shared/custom_fields/spacing.dart';
 import 'package:viper_form_app/shared/custom_fields/textfield.dart';
 
 abstract class FormFieldWidget {
+  final String label;
+
+  FormFieldWidget({required this.label});
   Widget build(BuildContext context);
 }
 
 class TextFieldFormField extends FormFieldWidget {
-  final String label;
   final String value;
+  final ValueChanged<String>? onChanged;
 
-  TextFieldFormField({required this.label, required this.value});
+  TextFieldFormField(
+      {required super.label, required this.value, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFieldV1(label: label, value: value);
+    return CustomTextFieldV1(
+      label: label,
+      value: value,
+      onChanged: onChanged,
+    );
   }
 }
 
 class CheckboxFormField extends FormFieldWidget {
-  final String label;
   final bool selected;
   final ValueChanged<bool> onChanged;
 
   CheckboxFormField(
-      {required this.label, required this.selected, required this.onChanged});
+      {required super.label, required this.selected, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +47,9 @@ class CheckboxFormField extends FormFieldWidget {
 class CustomSpacingField extends FormFieldWidget {
   final double spacing;
 
-  CustomSpacingField({this.spacing = 8});
+  CustomSpacingField({this.spacing = 8, super.label = "SPACING"});
   @override
   Widget build(BuildContext context) {
-    return CustomSpacing(space: spacing);
+    return Gap(spacing);
   }
 }

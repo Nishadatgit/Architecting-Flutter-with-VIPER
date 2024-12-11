@@ -1,14 +1,12 @@
-import 'package:equatable/equatable.dart';
+class FormDataEntity {
+  String firstName;
+  String lastName;
+  int age;
+  String address;
+  String city;
+  String emailAddress;
 
-class FormDataEntity extends Equatable {
-  final String firstName;
-  final String lastName;
-  final int age;
-  final String address;
-  final String city;
-  final String emailAddress;
-
-  const FormDataEntity({
+  FormDataEntity({
     required this.firstName,
     required this.lastName,
     required this.age,
@@ -27,7 +25,4 @@ class FormDataEntity extends Equatable {
       emailAddress: json['email_address'],
     );
   }
-
-  @override
-  List<Object?> get props => [firstName, lastName, age];
 }

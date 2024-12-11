@@ -15,7 +15,7 @@ class FormDataApiClient {
   Future<dynamic> fetchFormData() async {
     try {
       final response = await dio.get(
-        '$baseUrl/form_data',
+        '$baseUrl/form_data_v2',
       );
 
       if (response.statusCode == 200) {

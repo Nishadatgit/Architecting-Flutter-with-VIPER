@@ -1,32 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:viper_form_app/modules/form_data/data/network/api_client.dart';
+import 'package:viper_form_app/data/network/api_client.dart';
 import 'package:viper_form_app/modules/form_data/entity/form_data_entity.dart';
 import 'package:viper_form_app/modules/form_data/interactor/form_data_interactor.dart';
 import 'package:viper_form_app/modules/form_data/presenter/form_data_presenter.dart';
 import 'package:viper_form_app/modules/form_data/router/form_data_router.dart';
+import 'package:viper_form_app/modules/form_data/view/form_data_form_field_manager.dart';
 import 'package:viper_form_app/modules/form_data/view/form_data_view_contract.dart';
-import 'package:viper_form_app/shared/form_fields/form_field.dart';
+import 'package:viper_form_app/modules/form_data_v2/view/form_data_view_v2.dart';
 import 'package:viper_form_app/shared/form_fields/form_field_manager.dart';
-
-class FormFieldManager implements IFormFieldManager<FormDataEntity> {
-  @override
-  List<FormFieldWidget> getFields(FormDataEntity formData) {
-    return [
-      TextFieldFormField(label: 'First Name', value: formData.firstName),
-      CustomSpacingField(),
-      TextFieldFormField(label: 'Last Name', value: formData.lastName),
-      CustomSpacingField(),
-      TextFieldFormField(label: 'Age', value: formData.age.toString()),
-      CustomSpacingField(),
-      TextFieldFormField(label: 'Address', value: formData.address),
-      CustomSpacingField(),
-      TextFieldFormField(label: 'City', value: formData.city),
-      CustomSpacingField(),
-      TextFieldFormField(label: 'Email Address', value: formData.emailAddress),
-    ];
-  }
-}
 
 class FormDataView extends StatefulWidget {
   const FormDataView({super.key});
@@ -43,26 +25,26 @@ class FormDataViewState extends State<FormDataView>
   bool isLoading = false;
   String? errorMessage;
   FormDataEntity? data;
-  late FormFieldManager fieldManager;
+  late IFormFieldManager fieldManager;
 
-  @override
-  void initState() {
-    super.initState();
+    @override
+    void initState() {
+      super.initState();
 
-    presenter = FormDataPresenter(
-      view: this,
-      interactor:
-          FormDataInteractorImpl(apiClient: GetIt.I<FormDataApiClient>()),
-      router: FormDataRouterImpl(context),
-    );
-    fieldManager = FormFieldManager();
-    presenter.fetchFormData();
-  }
+      presenter = FormDataPresenter(
+        view: this,
+        interactor:
+            FormDataInteractorImpl(apiClient: GetIt.I<FormDataApiClient>()),
+        router: FormDataRouterImpl(context),
+      );
+      fieldManager = FormFieldManager();
+      presenter.fetchFormData();
+    }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Products')),
+      appBar: AppBar(title: const Text('Form Data')),
       body: _buildBody(),
     );
   }
